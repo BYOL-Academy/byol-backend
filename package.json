@@ -1,6 +1,6 @@
 {
   "name": "byol-backend",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "licenses": [
     {
@@ -27,14 +27,15 @@
     "typescript": "^5.8.2"
   },
   "dependencies": {
+    "@types/mongoose": "^5.11.97",
     "dotenv-flow": "^4.1.0",
     "express": "^5.1.0",
     "mongodb": "^5.0.0",
+    "mongoose": "^8.14.1",
     "pino": "^9.6.0",
     "pino-http": "^10.4.0",
+    "pino-pretty": "^13.0.0",
     "reflect-metadata": "^0.2.2",
-    "tsconfig-paths": "^4.2.0",
-    "typeorm": "^0.3.22",
-    "pino-pretty": "^13.0.0"
+    "tsconfig-paths": "^4.2.0"
   }
 }
