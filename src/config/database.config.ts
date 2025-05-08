@@ -1,11 +1,12 @@
 import { env } from '@/utils'
-import { DataSourceOptions } from 'typeorm'
 
-export const databaseConfiguration: DataSourceOptions = {
+export const databaseConfiguration: any = {
   type: env!.databaseType as any,
-  url: `mongodb://${env.databaseUsername}:${env.databasePassword}@${env.databaseHost}${env.databseDeploymentMode === 'on_premise' ? `:${env.databasePort}` : ''}/${
-    env.databaseName
-  }`,
+  url: `${
+    env.databseDeploymentMode === 'on_premise'
+      ? `mongodb://${env.databaseUsername}:${env.databasePassword}@${env.databaseHost}:${env.databasePort}`
+      : `mongodb+srv://${env.databaseUsername}:${encodeURIComponent(env.databasePassword!)}@${env.databaseHost}`
+  }/${env.databaseName}`,
   synchronize: env.nodeEnvironment === 'development', // Only enable in development
   logging: env.databaseLogging,
   entities: ['src/database/models/*.model.ts'],
