@@ -20,9 +20,9 @@ class EnvironmentVariables {
 
   private _initialize() {
     this._environmentVariables = [
-      'NODE_ENV',
+      'VITE_NODE_ENV',
       'APP_NAME',
-      'PORT',
+      'VITE_PORT',
       'LOG_LEVEL',
       'LOG_FILES_DIRECTORY_NAME',
       'LOG_FILE_NAME',
@@ -58,11 +58,18 @@ class EnvironmentVariables {
   }
 
   get port(): number {
-    return +ENV['PORT']!
+    return +ENV['VITE_PORT']!
   }
 
   get nodeEnvironment(): string {
-    return ENV['NODE_ENV']!
+    return ENV['VITE_NODE_ENV']!
+  }
+
+  get nodeLocalhost(): string {
+    return ENV['VITE_LOCALHOST']!
+  }
+  get clientURL(): string {
+    return ENV['VITE_CLIENT_URL']!
   }
 
   get logLevel(): Level {
