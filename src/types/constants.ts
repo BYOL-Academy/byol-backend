@@ -5,6 +5,6 @@ export enum ByolRole {
 
 export type Role = ByolRole | 'Admin' | 'Member'
 export type PlanProps = 'Basic' | 'Premium'
-export const plans: readonly PlanProps[]
+export const plans: readonly PlanProps[] = ['Basic', 'Premium']
 
 export {}
