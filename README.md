@@ -178,13 +178,13 @@ cp .env.example .env.development
 ### 3. Run Dev Server
 
 ```bash
-npm run dev
+npm run start:dev
 ```
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Submit issues, feature ideas, or PRs 🙌
+Contributions are welcome here (https://github.com/BYOL-Academy/BYOL)! Submit issues, feature ideas, or PRs 🙌
 
 ---
