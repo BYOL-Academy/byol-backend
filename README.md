@@ -43,7 +43,7 @@ Byol/
 Supports per-environment `.env` files. Example for development:
 
 ```
-NODE_ENV="development"
+VITE_NODE_ENV="development"
 APP_NAME="my-app"
 PORT=3000
 LOG_LEVEL="debug"

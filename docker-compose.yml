@@ -7,7 +7,7 @@ services:
       - "3000:3000"
     restart: unless-stopped
     environment:
-      - NODE_ENV=development
+      - VITE_NODE_ENV=development
       - TS_NODE_BASEURL=./dist
       - DB_HOST=db
     depends_on:
