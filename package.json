@@ -4,6 +4,7 @@
   "description": "",
   "license": "Proprietary",
   "author": "Sagar Verma",
+  "type": "module",
   "scripts": {
     "start:dev": "nodemon",
     "build": "rimraf dist && tsc",
@@ -33,6 +34,7 @@
     "bcrypt": "^5.1.1",
     "colors": "^1.4.0",
     "dotenv-flow": "^4.1.0",
+    "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.4.0",
     "eslint-plugin-unused-imports": "^4.1.4",
     "express": "^5.1.0",
