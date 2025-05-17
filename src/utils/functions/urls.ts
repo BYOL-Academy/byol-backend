@@ -111,7 +111,7 @@ export const createHref = (
   href: string,
   domain: string,
   // any params, doesn't have to be all of them
-  utmParams?: Partial<Record<typeof UTMTags[number], string>>
+  utmParams?: Partial<Record<(typeof UTMTags)[number], string>>,
 ) => {
   if (domain === 'byolacademy.com') return href
   const url = new URL(href.startsWith('/') ? `https://byolacademy.com${href}` : href)

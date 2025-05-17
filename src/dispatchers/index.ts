@@ -1,1 +1,1 @@
-export * from './response.dispatcher';
+export * from "./response.dispatcher";

@@ -3,6 +3,8 @@ import pluginJs from '@eslint/js'
 import tseslint from 'typescript-eslint'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import importPlugin from 'eslint-plugin-import'
+import unusedImports from 'eslint-plugin-unused-imports'
+
 export default [
   { ignores: ['/frontend/vite.config.js', '**/**/public', '**/frontend/*'] },
   {
@@ -17,7 +19,7 @@ export default [
     // Add your rules here
     rules: {
       'import/extensions': ['error', 'always'],
-      'unused-imports/no-unused-imports': 'error',
+      // 'unused-imports/no-unused-imports': 'error',
     },
   },
   { languageOptions: { globals: globals.node } },

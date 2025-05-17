@@ -1,30 +1,30 @@
-import mongoose, { Document, Model, Schema } from 'mongoose'
-import bcrypt from 'bcrypt'
-import { ByolRole, plans } from '@/types/constants'
+import mongoose, { Document, Model, Schema } from "mongoose";
+import bcrypt from "bcrypt";
+import { ByolRole } from "@/types/constants";
 
 export interface UserDocument extends Document {
-  username: string
-  email: string
-  password: string
-  role: string
-  currentPlan: string
-  status: string
-  firstName?: string
-  lastName?: string
-  profileImageURL?: string
-  provider: string
-  company?: string
-  providerData?: object
-  isVerified: boolean
-  forgotPasswordToken?: string
-  forgotPasswordTokenExpiry?: Date
-  forgotPasswordTokenExpiryInterval?: Date
-  verifyToken?: string
-  verifyTokenExpiry?: Date
-  inviteToken?: string
-  inviteTokenExpiry?: Date
-  inviteTokenExpiryInterval?: Date
-  isvalidPassword: (password: string) => Promise<boolean>
+  username: string;
+  email: string;
+  password: string;
+  role: string;
+  currentPlan: string;
+  status: string;
+  firstName?: string;
+  lastName?: string;
+  profileImageURL?: string;
+  provider: string;
+  company?: string;
+  providerData?: object;
+  isVerified: boolean;
+  forgotPasswordToken?: string;
+  forgotPasswordTokenExpiry?: Date;
+  forgotPasswordTokenExpiryInterval?: Date;
+  verifyToken?: string;
+  verifyTokenExpiry?: Date;
+  inviteToken?: string;
+  inviteTokenExpiry?: Date;
+  inviteTokenExpiryInterval?: Date;
+  isvalidPassword: (password: string) => Promise<boolean>;
 }
 
 // Define the user schema
@@ -56,14 +56,14 @@ const UserSchema: Schema<UserDocument> = new mongoose.Schema(
     currentPlan: {
       type: String,
       trim: true,
-      enum: ['Basic', 'Premium'],
-      default: 'Basic',
+      enum: ["Basic", "Premium"],
+      default: "Basic",
     },
     status: {
       type: String,
       trim: true,
-      enum: ['active', 'inactive'],
-      default: 'inactive',
+      enum: ["active", "inactive"],
+      default: "inactive",
     },
     firstName: {
       type: String,
@@ -80,8 +80,8 @@ const UserSchema: Schema<UserDocument> = new mongoose.Schema(
     provider: {
       type: String,
       trim: true,
-      enum: ['google', 'email'],
-      default: 'email',
+      enum: ["google", "email"],
+      default: "email",
     },
     company: {
       type: String,
@@ -103,40 +103,45 @@ const UserSchema: Schema<UserDocument> = new mongoose.Schema(
     inviteTokenExpiry: Date,
     inviteTokenExpiryInterval: Date,
   },
-  { timestamps: true }
-)
+  { timestamps: true },
+);
 
 // Pre-save hook to hash the password
-UserSchema.pre<UserDocument>('save', async function (next) {
+UserSchema.pre<UserDocument>("save", async function (next) {
   try {
     if (this.isNew) {
       // isNew is a property in mongoose which tells if the document is new or not because evertime we hit the user.save() method it will hasshed the password again
-      const salt = await bcrypt.genSalt(10)
-      const hashedPassword = await bcrypt.hash(this.password, salt)
-      this.password = hashedPassword
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(this.password, salt);
+      this.password = hashedPassword;
 
       if (this.email === process.env.ADMIN_EMAIL?.toLowerCase()) {
-        this.role = ByolRole.Admin
-        this.status = 'active'
+        this.role = ByolRole.Admin;
+        this.status = "active";
       }
     }
-    next()
+    next();
   } catch (err) {
-    next(err as Error)
+    next(err as Error);
   }
-})
+});
 
 // Method to compare passwords
-UserSchema.methods.isvalidPassword = async function (this: UserDocument, password: string): Promise<boolean> {
+UserSchema.methods.isvalidPassword = async function (
+  this: UserDocument,
+  password: string,
+): Promise<boolean> {
   try {
-    const hashedPassword = this.password.replace('$2y$', '$2b$')
-    return await bcrypt.compare(password, hashedPassword)
+    const hashedPassword = this.password.replace("$2y$", "$2b$");
+    return await bcrypt.compare(password, hashedPassword);
   } catch (error) {
-    throw new Error((error as Error).message)
+    throw new Error((error as Error).message);
   }
-}
+};
 
 // Check if the model is already compiled
-const User: Model<UserDocument> = mongoose.models.byol_user || mongoose.model<UserDocument>('byol_user', UserSchema)
+const User: Model<UserDocument> =
+  mongoose.models.byol_user ||
+  mongoose.model<UserDocument>("byol_user", UserSchema);
 
-export { User }
+export { User };
